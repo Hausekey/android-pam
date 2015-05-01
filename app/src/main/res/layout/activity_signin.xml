@@ -29,10 +29,18 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="20dp" />
-<!--
-   <TextView 
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:id="@+id/dsu_url"/>
--->
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:id="@+id/edit_dsu_url"
+        android:text="@string/edit_url"
+        android:textColor="#07c"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:gravity="right"/>
+
 </RelativeLayout>

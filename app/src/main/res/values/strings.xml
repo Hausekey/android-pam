@@ -11,6 +11,7 @@
     <string name="dsu_client_id">io.smalldatalab.android.pam</string>
     <string name="dsu_client_secret">fMNqTw27vwltUqHceFUgqLkHplxuv2vROBpuoy4GkoPVTuFCsV</string>
     <string name="dsu_client_url">https://ohmage-omh.smalldata.io/dsu</string>
+    <string name="edit_url">(Edit the URL)</string>
 
     <!--omh schema settings -->
     <string name="schema_namespace">cornell</string>

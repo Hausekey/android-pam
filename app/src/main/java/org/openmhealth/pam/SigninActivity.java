@@ -1,10 +1,14 @@
 package org.openmhealth.pam;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,7 +19,7 @@ import io.smalldatalab.omhclient.DSUClient;
 
 public class SigninActivity extends Activity {
 
-    //private TextView dsuUrl;
+    private TextView editDsuUrl;
     private DSUClient mDSUClient;
 
     @Override
@@ -23,12 +27,6 @@ public class SigninActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         this.setContentView(R.layout.activity_signin);
-        mDSUClient =
-                new DSUClient(
-                        this.getString(R.string.dsu_client_url),
-                        this.getString(R.string.dsu_client_id),
-                        this.getString(R.string.dsu_client_secret),
-                        this);
         this.findViewById(R.id.sign_in_button).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,13 +34,45 @@ public class SigninActivity extends Activity {
 
             }
         });
-        /* TODO: Hide the DSU url for now until we have the changing URL function working */
-        // Show current DSU url
-        //dsuUrl = (TextView) this.findViewById(R.id.dsu_url);
-        //dsuUrl.setText(this.getString(R.string.dsu_root_url));
+        // Allow user the change the DSU URL
+        editDsuUrl = (TextView) this.findViewById(R.id.edit_dsu_url);
+        editDsuUrl.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(SigninActivity.this);
+                builder.setTitle("Edit the URL");
+
+                // Set up the input
+                final EditText input = new EditText(SigninActivity.this);
+                input.setText(DSUHelper.getUrl(SigninActivity.this));
+                input.setInputType(InputType.TYPE_CLASS_TEXT);
+                builder.setView(input);
+
+                // Set up the buttons
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DSUHelper.setUrl(SigninActivity.this, input.getText().toString());
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builder.show();
+            }
+        });
     }
 
     private void login() {
+        mDSUClient =
+                new DSUClient(
+                        DSUHelper.getUrl(this),
+                        this.getString(R.string.dsu_client_id),
+                        this.getString(R.string.dsu_client_secret),
+                        this);
         new Thread() {
             @Override
             public void run() {

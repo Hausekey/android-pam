@@ -81,7 +81,7 @@ public class PAMActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         mDSUClient =
                 new DSUClient(
-                        this.getString(R.string.dsu_client_url),
+                        DSUHelper.getUrl(PAMActivity.this),
                         this.getString(R.string.dsu_client_id),
                         this.getString(R.string.dsu_client_secret),
                         PAMActivity.this);
