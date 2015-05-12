@@ -40,7 +40,7 @@ public class SigninActivity extends Activity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(SigninActivity.this);
-                builder.setTitle("Edit the URL");
+                builder.setTitle("Server Address");
 
                 // Set up the input
                 final EditText input = new EditText(SigninActivity.this);
