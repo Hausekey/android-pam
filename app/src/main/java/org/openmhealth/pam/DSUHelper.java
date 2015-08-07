@@ -7,7 +7,7 @@ import android.preference.PreferenceManager;
 import io.smalldatalab.android.pam.R;
 
 /**
- * Created by jared on 5/1/15.
+ * Created by jaredsieling on 5/1/15.
  */
 public class DSUHelper {
 

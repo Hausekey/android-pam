@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.smalldatalab.android.pam"
-    android:versionCode="20150325"
+    android:versionCode="20150807"
     android:versionName="@string/pam_version_name" >
 
     <uses-sdk
@@ -52,7 +52,7 @@
         </activity>
 
         <!-- For Signin -->
-        <activity android:name="org.openmhealth.pam.SigninActivity"/>
+        <activity android:name="org.openmhealth.pam.SigninActivity" android:theme="@android:style/Theme.Light"/>
 
         <!-- For reminders -->
         <activity android:name="org.openmhealth.utils.reminders.ReminderListActivity"/>

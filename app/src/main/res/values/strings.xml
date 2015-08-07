@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
     <string name="app_name">PAM</string>
-    <string name="pam_version_name">2.02</string>
+    <string name="pam_version_name">2.03</string>
 
 
     <!-- for omhclientlib -->
@@ -12,6 +12,10 @@
     <string name="dsu_client_secret">fMNqTw27vwltUqHceFUgqLkHplxuv2vROBpuoy4GkoPVTuFCsV</string>
     <string name="dsu_client_url">https://ohmage-omh.smalldata.io/dsu</string>
     <string name="edit_url">(Edit server address)</string>
+    <string name="or">~ or ~</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="login">Login</string>
 
     <!--omh schema settings -->
     <string name="schema_namespace">cornell</string>

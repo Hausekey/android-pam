@@ -30,8 +30,14 @@ public class SigninActivity extends Activity {
         this.findViewById(R.id.sign_in_button).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+                signinGoogle();
 
+            }
+        });
+        this.findViewById(R.id.login_button).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signinOmh();
             }
         });
         // Allow user the change the DSU URL
@@ -66,7 +72,7 @@ public class SigninActivity extends Activity {
         });
     }
 
-    private void login() {
+    private void signinGoogle() {
         mDSUClient =
                 new DSUClient(
                         DSUHelper.getUrl(this),
@@ -97,6 +103,46 @@ public class SigninActivity extends Activity {
             }
         }.start();
 
+    }
+
+    private void signinOmh() {
+        final String username = ((EditText) this.findViewById(R.id.username)).getText().toString();
+        final String password = ((EditText) this.findViewById(R.id.password)).getText().toString();
+
+        if (username.isEmpty() || password.isEmpty()){
+            showToast("You must enter a username and password.");
+            return;
+        }
+
+        mDSUClient =
+                new DSUClient(
+                        DSUHelper.getUrl(this),
+                        this.getString(R.string.dsu_client_id),
+                        this.getString(R.string.dsu_client_secret),
+                        this);
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    if (mDSUClient.blockingOmhSignIn(SigninActivity.this, username, password) != null) {
+                        showToast("Sign In Succeeded");
+                        setResult(RESULT_OK);
+                        SigninActivity.this.finish();
+                        return;
+                    }
+                } catch (IOException e) {
+                    showToast("Sign In Failed. Please check your Internet connection");
+                    Log.e(SigninActivity.class.getSimpleName(), "Network Error", e);
+
+
+                } catch (Exception e) {
+                    showToast("Sign In Failed. Unknown Error.");
+                    Log.e(SigninActivity.class.getSimpleName(), "Sign In Failed", e);
+
+                }
+
+            }
+        }.start();
     }
 
     private void showToast(final String msg) {
