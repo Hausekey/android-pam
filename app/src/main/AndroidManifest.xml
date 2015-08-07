@@ -1,7 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.smalldatalab.android.pam"
-    android:versionCode="20150807"
-    android:versionName="@string/pam_version_name" >
+    package="io.smalldatalab.android.pam">
 
     <uses-sdk
         android:minSdkVersion="8"
