@@ -44,7 +44,7 @@
 	        android:text="Logout" />
 	
 	    <Button
-	        android:id="@+id/post_submit"
+	        android:id="@+id/reload_images"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"

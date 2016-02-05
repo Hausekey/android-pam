@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.PorterDuff;
 import android.location.Location;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
@@ -107,22 +105,14 @@ public class PAMActivity extends FragmentActivity {
 
         gridview = (GridView) this.findViewById(R.id.pam_grid);
 
-        Button submit = (Button) this.findViewById(R.id.post_submit);
+        Button submit = (Button) this.findViewById(R.id.reload_images);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Check PAM input
-                if (null == pam_photo_id) {
-                    Toast toast = Toast.makeText(PAMActivity.this, "Please select a picture!",
-                            Toast.LENGTH_SHORT);
-                    toast.show();
-                } else {
-                    onSubmit();
-                }
+                loadImages();
+                setupPAM();
             }
         });
-
-
 
     }
     @Override
@@ -142,10 +132,6 @@ public class PAMActivity extends FragmentActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.reload:
-                loadImages();
-                setupPAM();
-                return true;
             case R.id.action_sign_out:
                 try {
                     mDSUClient.blockingSignOut();
@@ -296,7 +282,6 @@ public class PAMActivity extends FragmentActivity {
                 images[i] = BitmapFactory.decodeStream(assets.open(subFolder + "/" + filename));
                 imageIds[i] = filename.split("_")[1].charAt(0) - '0';
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -337,9 +322,6 @@ public class PAMActivity extends FragmentActivity {
                 }
                 imageView.setImageBitmap(images[position]);
 
-                if (position == selection)
-                    highlightSelection(imageView);
-
                 return imageView;
             }
         });
@@ -347,18 +329,11 @@ public class PAMActivity extends FragmentActivity {
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                if (selection != gridview.INVALID_POSITION)
-                    ((ImageView) parent.getChildAt(selection)).setColorFilter(null);
-                highlightSelection(v);
                 selection = position;
                 pam_photo_id = IMAGE_FOLDERS[position];
+                onSubmit();
             }
         });
     }
-
-    private void highlightSelection(View v) {
-        ((ImageView) v).setColorFilter(0xffff9933, PorterDuff.Mode.MULTIPLY);
-    }
-
 
 }
