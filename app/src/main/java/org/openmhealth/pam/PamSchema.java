@@ -1,8 +1,7 @@
 package org.openmhealth.pam;
-
-import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 
 
 public class PamSchema {
@@ -12,9 +11,9 @@ public class PamSchema {
     final private PositiveAffect mPositiveAffect;
     final private NegativeAffect mNegativeAffect;
     final private Mood mMood;
-    final private DateTime dateTime;
+    final private String dateTime;
 
-    public PamSchema(int position, DateTime dateTime) {
+    public PamSchema(int position, String dateTime) {
 
         int valence = valence(position);
         int arousal = arousal(position);
@@ -241,7 +240,7 @@ public class PamSchema {
 
         @Override
         public String getJsonName() {
-            return "affect-valence";
+            return "affect_valence";
         }
 
         @Override
@@ -261,7 +260,7 @@ public class PamSchema {
 
         @Override
         public String getJsonName() {
-            return "affect-arousal";
+            return "affect_arousal";
         }
 
         @Override
@@ -371,7 +370,7 @@ public class PamSchema {
 
     public JSONObject toJSON() throws JSONException {
         JSONObject dt = new JSONObject();
-        dt.put("date_time", dateTime.toString());
+        dt.put("date_time", dateTime);
 
         JSONObject obj = new JSONObject();
         obj.put(mAffectValence.getJsonName(), mAffectValence.getJsonValue().getPropertyValue().getJsonValue());

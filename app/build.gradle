@@ -8,8 +8,8 @@ android {
         applicationId "io.smalldatalab.android.pam"
         minSdkVersion 9
         targetSdkVersion 21
-        versionCode 4
-        versionName "1.1.3"
+        versionCode 5
+        versionName "1.1.4"
     }
     buildTypes {
         release {
@@ -22,16 +22,13 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.1.1'
-    // for google sign-in
-    compile 'com.google.android.gms:play-services-identity:7.0.0'
-    compile 'com.google.android.gms:play-services-plus:7.0.0'
-    /** For omh upload library **/
-    //compile(name: 'omhclient_library-release', ext: 'aar')
+    /** For omh client library **/
+    compile(name:'omhclient_library-release-1.0.5', ext:'aar')
     // for http client
     compile 'com.squareup.okhttp:okhttp:2.3.0'
     // for db
     compile 'com.github.satyan:sugar:1.3'
-    // for datetime
-    compile 'joda-time:joda-time:2.3'
-    compile project(':..:omh-dsu-android-client-lib:omhclient_library')
+    // for google sign-in
+    compile 'com.google.android.gms:play-services-identity:8.4.0'
+
 }
