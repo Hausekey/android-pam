@@ -31,7 +31,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import org.joda.time.DateTime;
 import org.json.JSONObject;
 import org.openmhealth.utils.reminders.ReminderListActivity;
 import org.openmhealth.utils.reminders.ReminderManager;
@@ -43,6 +42,7 @@ import io.smalldatalab.android.pam.R;
 import io.smalldatalab.omhclient.DSUClient;
 import io.smalldatalab.omhclient.DSUDataPoint;
 import io.smalldatalab.omhclient.DSUDataPointBuilder;
+import io.smalldatalab.omhclient.ISO8601;
 
 
 public class PAMActivity extends FragmentActivity {
@@ -177,9 +177,9 @@ public class PAMActivity extends FragmentActivity {
     private void onSubmit() {
         try {
             int idx = Integer.valueOf(pam_photo_id.split("_")[0]);
-            DateTime dt = new DateTime();
 
             PamSchema pamSchema = new PamSchema(idx, dt);
+
             JSONObject body = pamSchema.toJSON();
             // attach location information is available
             if(userLocation != null) {
@@ -199,7 +199,6 @@ public class PAMActivity extends FragmentActivity {
                     .setSchemaVersion(getString(R.string.schema_version))
                     .setAcquisitionModality(getString(R.string.acquisition_modality))
                     .setAcquisitionSource(getString(R.string.acquisition_source_name))
-                    .setCreationDateTime(dt)
                     .setBody(body).createDSUDataPoint();
             datapoint.save();
 
